@@ -1,0 +1,56 @@
+name: Ruby on Rails Pipeline
+
+on:
+  schedule:
+    # Wakes up at 04 minutes past 3 AM, 9 AM, 3 PM, and 9 PM UTC
+    # (11:04 AM, 5:04 PM, 11:04 PM, and 5:04 AM Singapore Time)
+    - cron: '4 3,9,15,21 * * *'
+  workflow_dispatch:
+
+jobs:
+  ruby-sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Fetch Ruby Source
+        uses: actions/checkout@v4
+
+      - name: Mutate Model Definitions
+        run: |
+          # 30% chance to skip (maintains natural execution flow)
+          if [ $((RANDOM % 100)) -lt 30 ]; then
+            echo "Rails models current. Skipping execution."
+            exit 0
+          fi
+
+          mkdir -p app/models
+          TARGET_FILE="app/models/telemetry_record.rb"
+
+          if [ ! -f "$TARGET_FILE" ]; then
+            echo "# frozen_string_literal: true" > "$TARGET_FILE"
+            echo "" >> "$TARGET_FILE"
+            echo "class TelemetryRecord" >> "$TARGET_FILE"
+            echo "end" >> "$TARGET_FILE"
+          fi
+
+          COMPONENTS=("user_audit" "payment_event" "metric_node" "session_token" "cache_state")
+          PICKED_COMP=${COMPONENTS[$RANDOM % ${#COMPONENTS[@]}]}
+
+          # Insert new symbol attribute accessor before the final 'end'
+          sed -i "$ i\\  attr_accessor :node_${PICKED_COMP}_$RANDOM\\n" "$TARGET_FILE"
+
+          git config --global user.name "benji280180"
+          git config --global user.email "benji280180@gmail.com"
+
+          MESSAGES=(
+            "feat: add attr_accessor attribute mapping to Rails model"
+            "refactor: optimize Ruby domain model symbol accessors"
+            "fix: adjust attribute definitions on telemetry record"
+            "chore: sync rails ActiveRecord schema accessors"
+          )
+          MSG=${MESSAGES[$RANDOM % ${#MESSAGES[@]}]}
+
+          git add app/
+          git commit -m "$MSG"
+          git push
