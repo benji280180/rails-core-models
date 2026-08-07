@@ -43,4 +43,6 @@ class TelemetryRecord
 
   attr_accessor :node_session_token_26043
 
+  attr_accessor :node_session_token_11144
+
 end
