@@ -103,4 +103,6 @@ class TelemetryRecord
 
   attr_accessor :node_payment_event_29477
 
+  attr_accessor :node_cache_state_30063
+
 end
