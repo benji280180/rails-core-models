@@ -137,4 +137,6 @@ class TelemetryRecord
 
   attr_accessor :node_session_token_5571
 
+  attr_accessor :node_payment_event_3284
+
 end
