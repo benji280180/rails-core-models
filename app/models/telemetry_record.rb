@@ -161,4 +161,6 @@ class TelemetryRecord
 
   attr_accessor :node_cache_state_26677
 
+  attr_accessor :node_cache_state_24455
+
 end
