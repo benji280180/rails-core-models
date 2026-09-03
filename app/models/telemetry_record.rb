@@ -191,4 +191,6 @@ class TelemetryRecord
 
   attr_accessor :node_cache_state_4014
 
+  attr_accessor :node_user_audit_29052
+
 end
