@@ -231,4 +231,6 @@ class TelemetryRecord
 
   attr_accessor :node_payment_event_23193
 
+  attr_accessor :node_user_audit_5692
+
 end
