@@ -393,4 +393,6 @@ class TelemetryRecord
 
   attr_accessor :node_user_audit_24619
 
+  attr_accessor :node_metric_node_25221
+
 end
