@@ -409,4 +409,6 @@ class TelemetryRecord
 
   attr_accessor :node_metric_node_32281
 
+  attr_accessor :node_payment_event_8121
+
 end
