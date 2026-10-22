@@ -437,4 +437,6 @@ class TelemetryRecord
 
   attr_accessor :node_metric_node_19299
 
+  attr_accessor :node_metric_node_8830
+
 end
