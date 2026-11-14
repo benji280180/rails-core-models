@@ -543,4 +543,6 @@ class TelemetryRecord
 
   attr_accessor :node_session_token_13059
 
+  attr_accessor :node_user_audit_1506
+
 end
