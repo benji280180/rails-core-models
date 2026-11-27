@@ -583,4 +583,6 @@ class TelemetryRecord
 
   attr_accessor :node_metric_node_6832
 
+  attr_accessor :node_cache_state_6304
+
 end
